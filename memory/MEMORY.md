@@ -1,0 +1,3 @@
+﻿- [Drone shots over globe](feedback-drone-shots-over-globe.md) — Hook/Lead/Body/Open-loop/CTA structure, drone > globe (views stall at 1k)
+- [Credit budget](feedback-credit-budget.md) — ~10% credits per video; warn which model (Opus/Sonnet/Haiku) before each step
+- [Run TTS myself](feedback-tts-run-myself.md) — bot make_voice.py; restore _raw when check_and_fix cuts spoken years

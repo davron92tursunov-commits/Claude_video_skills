@@ -1,0 +1,17 @@
+# secrets and machine state: NEVER commit
+.env
+*.env
+bot/.env
+bot/data/
+*.log
+state.json
+__pycache__/
+*.pyc
+# generated media
+*.mp4
+*.wav
+*.zip
+hf/renders/
+hf/.hyperframes/
+hf/audio/mix.wav
+node_modules/

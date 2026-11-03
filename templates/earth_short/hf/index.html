@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait"><head><meta charset="UTF-8"/><meta name="viewport" content="width=1080, height=1920"/>
+<title>What If Every Tree Vanished</title>
+<script src="vendor/gsap.min.js"></script>
+<script type="importmap">{"imports":{"three":"./vendor/three/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
+<style>
+@font-face{font-family:'Poppins';font-weight:700;src:url(fonts/Poppins-Bold.ttf)}
+@font-face{font-family:'Poppins';font-weight:500;src:url(fonts/Poppins-Medium.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#root{position:relative;width:100%;height:100%}
+#gl{position:absolute;inset:0;width:1080px;height:1920px}
+#cut,#blk,#hv{position:absolute;inset:0;pointer-events:none}
+#cut{background:#000;opacity:0}#blk{opacity:0}#hv{opacity:0}
+.hud{position:absolute;left:60px;right:60px;text-align:center;font-family:Poppins,sans-serif;color:#fff}
+#tag{top:84px;font-weight:500;font-size:20px;letter-spacing:12px;color:rgba(214,230,255,.85)}
+#small{top:330px;font-weight:500;font-size:46px;letter-spacing:12px;color:rgba(235,242,255,.96);text-shadow:0 2px 18px rgba(0,0,0,.85);white-space:nowrap}
+#big{top:392px;font-weight:700;font-size:104px;line-height:1.08;letter-spacing:1px;font-variant-numeric:tabular-nums;text-shadow:0 0 34px rgba(150,200,255,.45),0 4px 24px rgba(0,0,0,.75);white-space:nowrap}
+#sub{top:540px;font-weight:500;font-size:36px;letter-spacing:8px;line-height:1.35;white-space:nowrap;color:#ffd23f;text-shadow:0 2px 18px rgba(0,0,0,.85)}
+#red{position:absolute;left:0;right:0;top:270px;text-align:center;font-family:Poppins,sans-serif;font-weight:700;font-size:34px;letter-spacing:10px;color:#ff4a3d;text-shadow:0 0 18px rgba(255,60,40,.6);opacity:0}
+#red i{display:inline-block;width:20px;height:20px;border-radius:50%;background:#ff4a3d;margin-right:16px;vertical-align:2px}
+#src{position:absolute;left:60px;right:60px;top:1745px;text-align:center;font-family:Poppins,sans-serif;font-weight:500;font-size:22px;letter-spacing:4px;color:rgba(220,228,240,.8);text-shadow:0 2px 10px rgba(0,0,0,.85)}
+.lab{position:absolute;font-family:Poppins,sans-serif;font-weight:700;font-size:30px;letter-spacing:6px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.9);transform:translate(-50%,-50%);opacity:0;white-space:nowrap}
+#gauge{position:absolute;left:90px;top:1560px;width:900px;font-family:Poppins,sans-serif;color:#fff;opacity:0}
+#gauge .tr{position:absolute;left:0;top:34px;width:900px;height:14px;border-radius:7px;background:rgba(255,255,255,.14)}
+#gfill{position:absolute;left:0;top:0;height:14px;border-radius:7px;background:linear-gradient(90deg,#4fb0ff,#ffd23f 60%,#ff4a3d);width:90px}
+#gmk{position:absolute;top:-9px;width:32px;height:32px;margin-left:-16px;border-radius:50%;background:#fff;box-shadow:0 0 22px rgba(255,255,255,.8)}
+#gauge .tk{position:absolute;top:66px;font-weight:500;font-size:20px;letter-spacing:3px;transform:translateX(-50%);color:rgba(225,235,255,.85);white-space:nowrap}
+#gval{position:absolute;left:0;top:-14px;font-weight:700;font-size:40px;letter-spacing:2px;font-variant-numeric:tabular-nums}
+#hv text{fill:#fff;font-family:Poppins,sans-serif;font-weight:700;font-size:30px;letter-spacing:6px;paint-order:stroke;stroke:rgba(0,0,0,.7);stroke-width:6px}
+#end{position:absolute;inset:0;opacity:0}
+#end .f{position:absolute;left:0;right:0;top:600px;text-align:center;font-family:Poppins,sans-serif;font-weight:700;font-size:150px;letter-spacing:6px;background:linear-gradient(180deg,#fff2b0,#ffd23f 45%,#e99a1c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 22px rgba(0,0,0,.6))}
+#end .t{position:absolute;left:0;right:0;top:790px;text-align:center;font-family:Poppins,sans-serif;font-weight:500;font-size:44px;letter-spacing:10px;line-height:1.4;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.8)}
+#pill{position:absolute;left:340px;width:400px;top:1000px;height:110px;border-radius:55px;background:#ff3b30;color:#fff;font-family:Poppins,sans-serif;font-weight:700;font-size:44px;letter-spacing:6px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 40px rgba(0,0,0,.45)}
+#cur{position:absolute;width:90px;height:90px;left:0;top:0}
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="67.3" data-width="1080" data-height="1920">
+<audio id="mix" src="audio/mix.wav" data-start="0" data-duration="67.3" data-track-index="1" data-volume="1"></audio>
+<canvas id="gl" width="1080" height="1920"></canvas>
+<div class="hud" id="tag">EARTH MECHANICS</div>
+<div id="red"><i></i><span id="redt">RIGHT NOW?</span></div>
+<div class="hud" id="small"></div>
+<div class="hud" id="big"></div>
+<div class="hud" id="sub"></div>
+<div id="src"></div>
+<div id="gauge"><div id="gval">21%</div><div class="tr"><div id="gfill"></div><div id="gmk"></div></div>
+ <div class="tk" style="left:150px">OXYGEN TODAY</div><div class="tk" style="left:850px">100%</div></div>
+<div id="blk"></div>
+<div id="end"><div class="f">FOLLOW</div><div class="t">TO SEE HOW EARTH<br>REALLY WORKS</div><div id="pill">FOLLOW</div>
+ <svg id="cur" viewBox="0 0 90 90"><path d="M20 8 L20 70 L36 56 L48 82 L60 76 L48 50 L70 50 Z" fill="#fff" stroke="#111" stroke-width="4" stroke-linejoin="round"/></svg></div>
+<div id="cut"></div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body></html>
